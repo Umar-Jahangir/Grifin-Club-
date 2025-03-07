@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Griffin Team</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background-color: #006A67;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s ease;
+        }
+
+        .logo {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .logo img {
+            width: 150px;
+            transition: transform 0.3s ease;
+        }
+
+        .logo img:hover {
+            transform: scale(1.1);
+        }
+
+        .custom-header {
+            background-color: #000B58;
+            padding: 15px;
+        }
+
+        .custom-nav .nav-link {
+            color: rgba(252, 252, 252, 0.955);
+            transition: color 0.3s ease;
+            margin: 0 15px;
+        }
+
+        .custom-nav .nav-link:hover {
+            text-decoration: underline;
+            color: #ffdd57;
+        }
+
+        .hero {
+            background-color: #FFF4B7;
+            padding: 50px 20px;
+            color: rgb(228, 75, 55);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .hero:hover {
+            background-color: #FFE4A1;
+            color: #C24431;
+        }
+
+        .team-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .member-card {
+            background: linear-gradient(180deg, #000B58, #003161, #006A67);
+            border-radius: 8px;
+            transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .member-card:hover {
+            transform: scale(1.05);
+            background: linear-gradient(180deg, #003161, #006A67, #000B58);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .member-details {
+            color: white;
+        }
+
+        .member-image img {
+            width: 200px;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .member-image img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Modal styles */
+        .modal-content {
+            background: transparent;
+            border: none;
+        }
+
+        .modal-image {
+            max-width: 100%;
+            border-radius: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .member-card {
+                text-align: center;
+            }
+            
+            .member-image img {
+                width: 100%;
+                max-width: 200px;
+                margin-top: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="logo">
+        <img src="Assets/TeamLogo.jpg" class="img-fluid" alt="Team Griffin Logo">
+    </div>
+
+    <header class="custom-header">
+        <marquee class="text-white">
+            <h2>Welcome to Team Griffin page</h2>
+        </marquee>
+        
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                    <ul class="navbar-nav custom-nav">
+                        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="teams.html">Teams</a></li>
+                        <li class="nav-item"><a class="nav-link" href="sponsor.html">Sponsors</a></li>
+                        <li class="nav-item"><a class="nav-link" href="notice.html">Notice Board</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero text-center">
+        <h2>Our Team for 2024-25</h2>
+    </section>
+
+    <main class="container py-5">
+        <div class="team-container" id="teamContainer">
+            <!-- Team members will be dynamically inserted here -->
+        </div>
+    </main>
+
+    <!-- Modal for image popup -->
+    <div class="modal fade" id="imageModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body p-0">
+                    <button type="button" class="btn-close position-absolute top-0 end-0 p-3" data-bs-dismiss="modal"></button>
+                    <img class="modal-image img-fluid" src="" alt="Team Member">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Load team data
+            const loadTeamData = () => {
+                const defaultTeamData = [
+                    {
+                        name: "Rohan Kulkarni",
+                        class: "B",
+                        branch: "CSE(DS)",
+                        year: "2025-26",
+                        role: "Captain",
+                        image: "./Assets/Team/Captain.jpg"
+
+                    },
+                    {
+                name: "Nrual Wakode",
+                class: "12",
+                branch: "Science",
+                year: "2024-25",
+                role: "Vice-captain"
+            },
+            {
+                name: "Soham Thakur",
+                class: "12",
+                branch: "Science",
+                year: "2024-25",
+                role: "Manager"
+            },
+            {
+                name: "Aagam Kothari",
+                class: "12",
+                branch: "Science",
+                year: "2024-25",
+                role: "Manager"
+            },
+            {
+                name: "Aagam Kothari",
+                class: "12",
+                branch: "Science",
+                year: "2024-25",
+                role: "Chief-Technical Officer"
+            },
+            {
+                name: "Suyesh Mishra",
+                class: "12",
+                branch: "Science",
+                year: "2024-25",
+                role: "Chief-Technical Officer"
+            },
+            {
+                name: "Akash Malsane",
+                class: "12",
+                branch: "Science",
+                year: "2024-25",
+                role: "Technical Officer"
+            },
+            {
+                name: "Yash Lad",
+                class: "12",
+                branch: "Science",
+                year: "2024-25",
+                role: "Non-Technical Officer"
+            },
+            {
+                name: "Anubrat Chaterjee",
+                class: "12",
+                branch: "Science",
+                year: "2024-25",
+                role: "Non-Technical Officer"
+            },
+            {
+                name: "Mayank Zade",
+                class: "12",
+                branch: "Science",
+                year: "2024-25",
+                role: "Publicity Head"
+            }
+                ];
+
+                if (!localStorage.getItem("teamData")) {
+                    localStorage.setItem("teamData", JSON.stringify(defaultTeamData));
+                }
+                return JSON.parse(localStorage.getItem("teamData"));
+            };
+
+            // Create team member cards
+            const createTeamMemberCards = (teamData) => {
+                const container = document.getElementById('teamContainer');
+                teamData.forEach(member => {
+                    const memberCard = `
+    <div class="member-card p-4">
+        <div class="row align-items-center">
+            <div class="col-md-8 member-details">
+                <h3>Name: ${member.name}</h3>
+                <p>Class: ${member.class}</p>
+                <p>Branch: ${member.branch}</p>
+                <p>Academic Year: ${member.year}</p>
+                ${member.role ? `<p>Role: ${member.role}</p>` : ''}
+            </div>
+            <div class="col-md-4 member-image text-center">
+                <img src="${member.image}" onerror="this.onerror=null; this.src='Assets/default.jpg';" 
+                     alt="${member.name}" class="img-fluid"
+                     data-bs-toggle="modal" data-bs-target="#imageModal">
+            </div>
+        </div>
+    </div>
+`;
+                    container.innerHTML += memberCard;
+                });
+            };
+
+            // Initialize image modal
+            const initializeImageModal = () => {
+                const modal = document.getElementById('imageModal');
+                const modalImage = modal.querySelector('.modal-image');
+                
+                document.querySelectorAll('.member-image img').forEach(img => {
+                    img.addEventListener('click', () => {
+                        modalImage.src = img.src;
+                    });
+                });
+            };
+
+            // Initialize the page
+            const teamData = loadTeamData();
+            createTeamMemberCards(teamData);
+            initializeImageModal();
+        });
+    </script>
+</body>
+</html>

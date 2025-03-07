@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Notice Management</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="noticeAdmin.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1a1a1a;
+            color: #f5f5f5;
+        }
+        
+        header {
+            background: #ff6600;
+        }
+        
+        .navbar {
+            background: #333;
+        }
+        
+        .form-control, .form-control:focus {
+            background-color: #333;
+            color: #f5f5f5;
+            border-color: #ff6600;
+        }
+        
+        .form-control.error {
+            border-color: #ff4136;
+            box-shadow: 0 0 5px rgba(255, 65, 54, 0.7);
+        }
+    </style>
+</head>
+<body>
+    <header class="text-center py-3">
+        <h1>Admin Panel: Notice Management</h1>
+    </header>
+
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item"><a href="noticeAdmin.html" class="nav-link text-warning">Notice Admin Panel</a></li>
+                <li class="nav-item"><a href="teamsAdmin.html" class="nav-link text-warning">Teams Admin Panel</a></li>
+                <li class="nav-item"><a href="index.html" class="nav-link text-warning">User Dashboard</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container mt-4">
+        <section class="bg-dark p-4 rounded">
+            <h2 class="text-warning mb-4">Update Event Notice</h2>
+            <form id="adminForm">
+                <div class="mb-3">
+                    <label for="eventName" class="form-label text-warning">Event Name:</label>
+                    <input type="text" class="form-control" id="eventName" required>
+                </div>
+                <div class="mb-3">
+                    <label for="eventDate" class="form-label text-warning">Event Date:</label>
+                    <input type="date" class="form-control" id="eventDate" required>
+                </div>
+                <div class="mb-3">
+                    <label for="eventTime" class="form-label text-warning">Event Time:</label>
+                    <input type="time" class="form-control" id="eventTime" required>
+                </div>
+                <div class="mb-3">
+                    <label for="eventLocation" class="form-label text-warning">Event Location:</label>
+                    <input type="text" class="form-control" id="eventLocation" required>
+                </div>
+                <div class="mb-3">
+                    <label for="eventFile" class="form-label text-warning">Attach File:</label>
+                    <input type="file" class="form-control" id="eventFile">
+                </div>
+                <div class="mb-3">
+                    <label for="aboutTheEvent" class="form-label text-warning">About the Event:</label>
+                    <textarea class="form-control" id="aboutTheEvent" rows="4"></textarea>
+                </div>
+                <button type="submit" class="btn btn-warning">Update Notice</button>
+            </form>
+        </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('#adminForm').on('submit', function(event) {
+            event.preventDefault();
+
+            if (!validateForm()) return;
+
+            const formData = new FormData(this);
+            const notice = {
+                eventName: $('#eventName').val(),
+                eventDate: $('#eventDate').val(),
+                eventTime: $('#eventTime').val(),
+                eventLocation: $('#eventLocation').val(),
+                aboutTheEvent: $('#aboutTheEvent').val(),
+                fileAttached: $('#eventFile')[0].files.length > 0
+            };
+
+            const notices = JSON.parse(localStorage.getItem('notices')) || [];
+            notices.push(notice);
+            localStorage.setItem('notices', JSON.stringify(notices));
+
+            alert('Notice successfully added!');
+            $('#adminForm')[0].reset();
+        });
+
+        function validateForm() {
+            const requiredFields = ['#eventName', '#eventDate', '#eventTime', '#eventLocation'];
+            let isValid = true;
+
+            requiredFields.forEach(selector => {
+                const $field = $(selector);
+                if (!$field.val().trim()) {
+                    $field.addClass('error');
+                    isValid = false;
+                } else {
+                    $field.removeClass('error');
+                }
+            });
+
+            return isValid;
+        }
+    });
+    </script>
+</body>
+</html>

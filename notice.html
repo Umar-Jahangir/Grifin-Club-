@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notice Board</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="notice.css">
+</head>
+<body>
+    <div class="container">
+        <div class="logo text-center my-3">
+            <img src="Assets/TeamLogo.jpg" class="icon" alt="Team Griffin Logo">
+        </div>
+
+        <header class="text-center bg-dark text-white py-2 mb-3">
+            <marquee>
+                <h2>Welcome to Team Griffin page</h2>
+            </marquee>
+            <nav>
+                <ul class="list-inline">
+                    <li class="list-inline-item"><a href="index.html" class="text-white">Home</a></li>
+                    <li class="list-inline-item"><a href="teams.html" class="text-white">Teams</a></li>
+                    <li class="list-inline-item"><a href="sponsor.html" class="text-white">Sponsors</a></li>
+                    <li class="list-inline-item"><a href="notice.html" class="text-white">Notice Board</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <section class="notice-board p-3 rounded">
+            <h1 class="text-center text-warning">Notice Board</h1>
+            <div class="notice-scroll">
+                <ul id="notices" class="notice-list">
+                    <li>Team Griffin workshop on Aeronautics: December 20, 2024.</li>
+                    <button onclick="window.location.href='register.html';" class="btn btn-primary">Register now</button>
+                    <hr>
+                    <li>We are recruiting</li>
+                    <button onclick="window.location.href='apply.html';" class="btn btn-primary">Apply now</button>
+                </ul>
+            </div>
+        </section>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+    $(document).ready(function () {
+        const notices = JSON.parse(localStorage.getItem('notices')) || [];
+        const $noticeList = $('#notices');
+
+        notices.forEach((notice) => {
+            const $li = $(`
+                <li>
+                    <strong>${notice.eventName}</strong><br>
+                    Date: ${notice.eventDate}<br>
+                    Time: ${notice.eventTime}<br>
+                    Location: ${notice.eventLocation}<br>
+                    Details: ${notice.aboutTheEvent}<br>
+                    <hr>
+                </li>
+            `);
+            $noticeList.append($li);
+        });
+    });
+    </script>
+</body>
+</html>
